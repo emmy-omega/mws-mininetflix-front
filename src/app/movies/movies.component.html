@@ -1,0 +1,23 @@
+<ng-container
+  *ngIf="movies | async; then thenTemplate; else elseTemplate"
+></ng-container>
+<ng-template #thenTemplate>
+  <div class="ui four column link cards">
+    <a
+      [routerLink]="['/movies/', movie.imdbID]"
+      class="card"
+      *ngFor="let movie of movies | async"
+    >
+      <div class="medium image">
+        <img src="{{ movie.Poster }}" alt="Movie Poster" />
+      </div>
+      <div class="content">
+        <div class="header">{{ movie.Title }}</div>
+        <div class="meta">{{ movie.Year }}</div>
+      </div>
+    </a>
+  </div>
+</ng-template>
+<ng-template #elseTemplate>
+  <div class="ui active text loader">Loading</div>
+</ng-template>

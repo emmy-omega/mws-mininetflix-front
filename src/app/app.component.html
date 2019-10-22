@@ -1,0 +1,70 @@
+<div class="ui container">
+  <div class="ui menu">
+    <a class="item" [routerLink]="['/movies']">Browse</a>
+
+    <div class="right menu">
+      <div class="ui search item">
+        <div class="ui icon input">
+          <input class="prompt" type="text" placeholder="Search movie..." />
+          <i class="search link icon"></i>
+        </div>
+      </div>
+      <ng-container *ngIf="fireAuth.user | async as user; else showSignIn">
+        <div class="ui right dropdown item" id="user-dropdown">
+          Hello {{ user.displayName }}
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a class="item" (click)="logout()">Sign Out</a>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #showSignIn>
+        <a class="item" id="loginLink">Sign In</a>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="ui segment">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div class="ui tiny modal">
+  <div class="header">Sign Up/In</div>
+  <div class="content">
+    <form
+      class="ui large form"
+      (ngSubmit)="login(loginForm)"
+      #loginForm="ngForm"
+    >
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input
+              type="text"
+              name="email"
+              placeholder="E-mail address"
+              [(ngModel)]="model.email"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              [(ngModel)]="model.password"
+            />
+          </div>
+        </div>
+        <button class="ui fluid large teal submit button" type="submit">
+          Login
+        </button>
+      </div>
+
+      <div class="ui error message"></div>
+    </form>
+  </div>
+</div>

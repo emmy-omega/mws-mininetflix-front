@@ -19,14 +19,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": false,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/semantic/semantic.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/semantic/semantic.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -71,8 +72,13 @@
           "options": {
             "browserTarget": "frontend:build"
           }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "frontend"
 }

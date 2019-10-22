@@ -1,0 +1,59 @@
+<ng-container *ngIf="movie | async as movie">
+  <div class="ui grid">
+    <div class="row">
+      <div class="six wide column">
+        <div class="ui image">
+          <img src="{{ movie.Poster }}" alt="Movie Post" />
+        </div>
+      </div>
+      <div class="ten wide right floated column">
+        <h1 class="ui dividing header">
+          <div class="content">{{ movie.Title }}</div>
+          <div class="small sub header">
+            <div class="ui horizontal divided list">
+              <div class="item">
+                <div class="content">
+                  <div class="meta">{{ movie.Year }}</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="content">
+                  <div class="meta">{{ movie.Runtime }}</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="content">
+                  <div class="meta">{{ movie.Rated }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </h1>
+        <h4 class="ui divided header">Plot</h4>
+        <p>{{ movie.Plot }}</p>
+        <div class="horizontal list">
+          <div class="item">
+            <div class="ui basic horizontal label">Staring</div>
+            {{ movie.Actors }}
+          </div>
+          <div class="item">
+            <div class="ui basic horizontal label">Created By</div>
+            {{ movie.Director }}
+          </div>
+          <div class="item">
+            <div class="ui basic horizontal label">Written By</div>
+            {{ movie.Writer }}
+          </div>
+          <div class="item">
+            <div class="ui basic horizontal label">Genre</div>
+            {{ movie.Genre }}
+          </div>
+          <div class="ui horizontal divider"></div>
+          <button class="ui basic bottom button">
+            <i class="favorite icon"></i>Add Favorite
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

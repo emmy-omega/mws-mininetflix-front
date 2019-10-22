@@ -1,31 +1,62 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { MovieService } from './movie.service';
 
+declare var jQuery: any;
 @Component({
   selector: 'app-root',
-  template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-    </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
-    
-  `,
+  templateUrl: './app.component.html',
   styles: []
 })
-export class AppComponent {
-  title = 'frontend';
+export class AppComponent implements OnInit {
+  // user: firebase.User;
+  model: { email: string; password: string } = { email: '', password: '' };
+  constructor(public fireAuth: AngularFireAuth) {}
+  ngOnInit(): void {
+    // this.fireAuth.auth.onAuthStateChanged((user: firebase.User) => {
+    //   this.user = user;
+    // });
+    ($ => {
+      $(document).ready(() => {
+        $('.modal').modal('attach events', '#loginLink', 'show');
+        $('.dropdown').dropdown();
+        $('.ui.search').search({
+          minCharacters: 3,
+          apiSettings: {
+            onResponse: function(resp) {
+              let response: any = { items: [] };
+              $.each(resp.Search, function(idx, mv) {
+                response.items.push({
+                  title: mv.Title,
+                  url: '/movies/' + mv.imdbID
+                });
+              });
+              return response;
+            },
+            url: 'http://omdbapi.com?apikey=2d0c12a8&type=movie&s={query}'
+          },
+          fields: {
+            results: 'items',
+            title: 'title',
+            url: 'url'
+          }
+        });
+      });
+    })(jQuery);
+  }
+
+  login(form) {
+    ($ => {
+      console.log(form);
+    })(jQuery);
+
+    this.fireAuth.auth.signInWithEmailAndPassword(
+      form.value.email,
+      form.value.password
+    );
+  }
+
+  logout() {
+    this.fireAuth.auth.signOut();
+  }
 }
