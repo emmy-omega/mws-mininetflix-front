@@ -6,7 +6,7 @@ import { setContext } from 'apollo-link-context';
 import { ApolloLink } from 'apollo-link';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-const uri = 'http://localhost:4000/graphql'; // <-- add the URL of the GraphQL server here
+const uri = 'https://mws-mininetflix-back.herokuapp.com/graphql'; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink, fireAuth: AngularFireAuth) {
   // const token = fireAuth.auth.currentUser.getIdToken;
   // const auth = setContext((operation, context) => ({
