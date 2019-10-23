@@ -2,7 +2,7 @@
   *ngIf="movies | async; then thenTemplate; else elseTemplate"
 ></ng-container>
 <ng-template #thenTemplate>
-  <div class="ui four column link cards">
+  <div class="ui four stackable doubling link cards">
     <a
       [routerLink]="['/movies/', movie.imdbID]"
       class="card"

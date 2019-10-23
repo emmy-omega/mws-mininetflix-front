@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MovieService } from './movie.service';
+import { AuthService } from './auth.service';
 
 declare var jQuery: any;
 @Component({
@@ -11,15 +12,26 @@ declare var jQuery: any;
 export class AppComponent implements OnInit {
   // user: firebase.User;
   model: { email: string; password: string } = { email: '', password: '' };
-  constructor(public fireAuth: AngularFireAuth) {}
+  constructor(
+    public fireAuth: AngularFireAuth,
+    private mService: MovieService,
+    private authService: AuthService
+  ) {}
   ngOnInit(): void {
     // this.fireAuth.auth.onAuthStateChanged((user: firebase.User) => {
-    //   this.user = user;
+    //   ($ => {
+    //     $('dropdown').
+    //   })(jQuery)
     // });
     ($ => {
       $(document).ready(() => {
-        $('.modal').modal('attach events', '#loginLink', 'show');
-        $('.dropdown').dropdown();
+        // playground
+        // ======
+        if (this.fireAuth.user) {
+          var $dropdownItem = $('.menu .dropdown .item'),
+            $dropdown = $('.menu .ui.dropdown');
+          $dropdown.dropdown({ on: 'hover' });
+        }
         $('.ui.search').search({
           minCharacters: 3,
           apiSettings: {
@@ -46,17 +58,11 @@ export class AppComponent implements OnInit {
   }
 
   login(form) {
-    ($ => {
-      console.log(form);
-    })(jQuery);
-
-    this.fireAuth.auth.signInWithEmailAndPassword(
-      form.value.email,
-      form.value.password
-    );
+    this.authService.signin();
   }
 
   logout() {
-    this.fireAuth.auth.signOut();
+    // this.fireAuth.user.subscribe(u => u.delete());
+    this.authService.signout();
   }
 }

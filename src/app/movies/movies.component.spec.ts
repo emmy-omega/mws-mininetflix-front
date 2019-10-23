@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MoviesComponent } from './movies.component';
 import { MovieService } from '../movie.service';
 import { Observable } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 jest.mock('../movie.service');
 
@@ -14,7 +15,8 @@ describe('MoviesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [MoviesComponent],
-      providers: [MovieService]
+      providers: [MovieService],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 

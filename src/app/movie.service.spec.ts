@@ -21,7 +21,7 @@ const movieStub = {
 };
 const moviesStub = [movieStub];
 
-describe.only('MovieService', () => {
+describe.skip('MovieService', () => {
   let service: MovieService;
   let ctrl: ApolloTestingController;
 
@@ -36,7 +36,7 @@ describe.only('MovieService', () => {
     expect(service).toBeTruthy();
   });
 
-  test('#get should return all movie', () => {
+  test.skip('#get should return all movie', () => {
     ctrl = TestBed.get(ApolloTestingController);
     service.get().subscribe(mvs => {
       expect(mvs).toBeDefined();
@@ -47,7 +47,7 @@ describe.only('MovieService', () => {
     ctrl.verify();
   });
 
-  test('#find should return a movie', () => {
+  test.skip('#find should return a movie', () => {
     ctrl = TestBed.get(ApolloTestingController);
     service.find('Into The Matrix').subscribe(mv => {
       expect(mv).toBeDefined();

@@ -16,7 +16,11 @@ export class MovieComponent implements OnInit {
 
   ngOnInit() {
     this.movie = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.mService.find(params.get('id')))
+      switchMap((params: ParamMap) => this.mService.getMovie(params.get('id')))
     );
+  }
+
+  addFav(imdbID) {
+    this.mService.addFavorite(imdbID);
   }
 }

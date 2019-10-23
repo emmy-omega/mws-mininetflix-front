@@ -15,8 +15,8 @@ const movieStub = {
 const mock = (jest.genMockFromModule('../movie.service') as any).MovieService;
 
 mock.prototype = {
-  get: jest.fn().mockReturnValue(of([movieStub])),
-  find: jest.fn().mockImplementation((title: string) => of(movieStub))
+  getMovies: jest.fn().mockReturnValue(of([movieStub])),
+  getMovie: jest.fn().mockImplementation((title: string) => of(movieStub))
 };
 
 export const MovieService = mock;

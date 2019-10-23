@@ -1,5 +1,5 @@
 <ng-container *ngIf="movie | async as movie">
-  <div class="ui grid">
+  <div class="ui stackable two grid">
     <div class="row">
       <div class="six wide column">
         <div class="ui image">
@@ -49,7 +49,7 @@
             {{ movie.Genre }}
           </div>
           <div class="ui horizontal divider"></div>
-          <button class="ui basic bottom button">
+          <button class="ui basic bottom button" (click)="addFav(movie.imdbID)">
             <i class="favorite icon"></i>Add Favorite
           </button>
         </div>

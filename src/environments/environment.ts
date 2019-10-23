@@ -13,6 +13,10 @@ export const environment = {
     messagingSenderId: '199716533892',
     appId: '1:199716533892:web:109343126dc1ba7647f4d1',
     measurementId: 'G-6W8ZZR19FT'
+  },
+  imdb: {
+    key: '2d0c12a8',
+    url: 'http://omdbapi.com'
   }
 };
 

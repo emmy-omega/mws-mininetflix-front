@@ -1,15 +1,24 @@
 import { Injectable } from '@angular/core';
-import { of } from 'zen-observable';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor() {}
+  constructor(private fireauth: AngularFireAuth) {}
 
-  signup(user) {
-    return of();
+  get user() {
+    return this.fireauth.auth.currentUser;
   }
 
-  signin(signinFo: { email: string; password: string }) {}
+  signin() {
+    const provider = new auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    this.fireauth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+  }
+
+  signout() {
+    this.fireauth.auth.signOut();
+  }
 }
