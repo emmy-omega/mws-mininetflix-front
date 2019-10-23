@@ -16,7 +16,7 @@ export const environment = {
   },
   imdb: {
     key: '2d0c12a8',
-    url: 'http://omdbapi.com'
+    url: '//omdbapi.com'
   }
 };
 
